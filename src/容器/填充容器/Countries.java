@@ -9,50 +9,49 @@ import java.util.*;
 // TODO
 public class Countries {
     public static final String[][] DATA = {
-            {"AA", "A"},
-            {"BB", "B"},
-            {"CC", "C"},
-            {"DD", "D"},
-            {"EE", "E"},
-            {"FF", "F"}
+            {"河北省", "冀"},
+            {"山东省", "齐"},
+            {"辽宁省", "辽"},
+            {"黑龙江省", "黑"},
+            {"吉林省", "吉"},
+            {"甘肃省", "陇"},
+            {"青海省", "青"},
+            {"河南省", "豫"},
+            {"江苏省", "苏"},
+            {"湖北省", "鄂"},
+            {"湖北省", "湘"},
+            {"江西省", "赣"},
+            {"浙江省", "浙"},
+            {"广东省", "粤"},
+            {"云南省", "滇"},
+            {"福建省", "福"},
+            {"台湾省", "台"},
+            {"海南省", "琼"},
+            {"山西省", "晋"},
+            {"四川省", "川"},
+            {"陕西省", "陕"},
+            {"贵州省", "黔"},
+            {"安徽省", "皖"},
+            {"重庆市", "重庆"},
+            {"北京市", "北京"},
+            {"上海市", "上海"},
+            {"天津市", "天津"},
+            {"广西壮族自治区", "广西"},
+            {"内蒙古自治区", "内蒙"},
+            {"新疆维吾尔自治区", "新疆"},
+            {"西藏自治区", "西藏"},
+            {"宁夏回族自治区", "宁夏"},
+            {"澳门特别行政区", "澳门"},
+            {"香港特别行政区", "香港"}
     };
 
     private static class FlyweightMap extends AbstractMap<String, String> {
 
-
         @Override
-        public Set<Map.Entry<String, String>> entrySet() {
+        public Set<Entry<String, String>> entrySet() {
             return null;
         }
 
-        private static class Entry implements Map.Entry<String, String> {
-
-            int index;
-            @Override
-            public String getKey() {
-                return DATA[index][0];
-            }
-
-            @Override
-            public String getValue() {
-                return DATA[index][1];
-            }
-
-            @Override
-            public String setValue(String value) {
-                throw new UnsupportedOperationException();
-            }
-
-            @Override
-            public boolean equals(Object obj) {
-                return DATA[index][0].equals(obj);
-            }
-
-            @Override
-            public int hashCode() {
-                return DATA[index][0].hashCode();
-            }
-        }
     }
 
     static class EntrySet extends AbstractSet<Map.Entry<String, String>> {
