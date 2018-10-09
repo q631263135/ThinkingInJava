@@ -45,6 +45,16 @@ public class Countries {
             {"香港特别行政区", "香港"}
     };
 
+    static Map<String, String> map = new FlyweightMap();
+
+    public static Map<String, String> capitals() {
+        return map;
+    }
+
+    public static Map<String, String> capitals(int size) {
+        return select(size);
+    }
+
     private static class FlyweightMap extends AbstractMap<String, String> {
 
         @Override
@@ -85,16 +95,6 @@ public class Countries {
                 return new EntrySet(size);
             }
         };
-    }
-
-    static Map<String, String> map = new FlyweightMap();
-
-    public static Map<String, String> capitals() {
-        return map;
-    }
-
-    public static Map<String, String> capitals(int size) {
-        return select(size);
     }
 
 }
