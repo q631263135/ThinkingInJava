@@ -45,25 +45,55 @@ public class Countries {
             {"香港特别行政区", "香港"}
     };
 
-    static Map<String, String> map = new FlyweightMap();
-
-    public static Map<String, String> capitals() {
-        return map;
-    }
-
-    public static Map<String, String> capitals(int size) {
-        return select(size);
-    }
-
     private static class FlyweightMap extends AbstractMap<String, String> {
+
+
+        private static Set<Map.Entry<String, String>> entries = new EntrySet(DATA.length);
 
         @Override
         public Set<Entry<String, String>> entrySet() {
-            return null;
+            System.out.println("调用了 entrySet");
+            return entries;
         }
 
     }
 
+    // Entry 二元组直接使用了数组
+    static class Entry implements Map.Entry<String, String> {
+
+        int index;
+
+        public Entry(int index) {
+            this.index = index;
+        }
+
+        @Override
+        public String getKey() {
+            return DATA[index][0];
+        }
+
+        @Override
+        public String getValue() {
+            return DATA[index][1];
+        }
+
+        @Override
+        public String setValue(String value) {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public int hashCode() {
+            return DATA[index][0].hashCode();
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            return DATA[index][0].equals(obj);
+        }
+    }
+
+    // Entry Set 中没有声明 Entry，但在迭代器中访问了 Entry
     static class EntrySet extends AbstractSet<Map.Entry<String, String>> {
 
         private int size;
@@ -78,9 +108,31 @@ public class Countries {
             }
         }
 
+        private class Iter implements Iterator<Map.Entry<String, String>> {
+
+            private Entry entry = new Entry(-1);
+
+            @Override
+            public boolean hasNext() {
+                return entry.index < size - 1;
+            }
+
+            @Override
+            public Map.Entry<String, String> next() {
+                entry.index++;
+                return entry;
+            }
+
+            @Override
+            public void remove() {
+                throw new UnsupportedOperationException();
+            }
+        }
+
         @Override
         public Iterator<Map.Entry<String, String>> iterator() {
-            return null;
+            System.out.println("使用迭代器打印 entry");
+            return new Iter();
         }
 
         @Override
@@ -89,6 +141,7 @@ public class Countries {
         }
     }
 
+    // 通过指定 size，返回可以 访问指定数目的 Entry（通过直接访问数组实现）
     static Map<String, String> select(final int size) {
         return new FlyweightMap() {
             public Set<Map.Entry<String, String>> entrySet() {
@@ -97,4 +150,28 @@ public class Countries {
         };
     }
 
+    static Map<String, String> map = new FlyweightMap();
+
+    public static Map<String, String> capitals() {
+        return map;
+    }
+
+    public static Map<String, String> capitals(int size) {
+        return select(size);
+    }
+
+    // 这个 map 中，其实啥也没装
+    static List<String> names = new ArrayList<>(map.keySet());
+
+    public static List<String> names() {
+        return names;
+    }
+
+    public static List<String> names(int size) {
+        return new ArrayList<>(select(size).keySet());
+    }
+
+    public static void main(String[] args) {
+        System.out.println(capitals());
+    }
 }
