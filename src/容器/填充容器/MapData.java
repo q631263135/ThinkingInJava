@@ -78,6 +78,8 @@ public class MapData<K, V> extends LinkedHashMap<K, V> {
         // Unchecked call to 'MapData(Generator<Pair<K, V>>, int)' as a member of raw type '容器.填充容器.MapData'
         System.out.println(new MapData(new Letters(), 5));
 
+        System.out.println(new MapData<>(new Letters(), 5));
+
         // Explicit type argument Integer, String can be replaced with <>
         System.out.println(new MapData<Integer, String>(new Letters(), "abc"));
 
