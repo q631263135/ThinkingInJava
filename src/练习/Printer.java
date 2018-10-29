@@ -11,6 +11,10 @@ public class Printer {
         System.out.println("打印第" + line++ + "个输出： " + o.toString());
     }
 
+    public static void println(Object o, String msg) {
+        System.out.println(msg + o.toString());
+    }
+
     public static void main(String[] args) {
         Printer.println("abc");
     }

@@ -52,14 +52,26 @@ public class TypesForSets {
 //        fill(new LinkedHashSet<HashType>(), HashType.class);
 //        fill(new TreeSet<TreeType>(), TreeType.class);
 
+        System.out.print("HashSet<HashType>: ");
         test(new HashSet<HashType>(), HashType.class);
+
+        System.out.print("LinkedHashSet<HashType>: ");
         test(new LinkedHashSet<HashType>(), HashType.class);
+
+        System.out.print("TreeSet<TreeType>: ");
         test(new TreeSet<TreeType>(), TreeType.class);
 
         // Things that don't work
+        System.out.print("HashSet<SetType>: ");
         test(new HashSet<SetType>(), SetType.class);
+
+        System.out.print("HashSet<TreeType>: ");
         test(new HashSet<TreeType>(), TreeType.class);
+
+        System.out.print("LinkedHashSet<SetType>: ");
         test(new LinkedHashSet<SetType>(), SetType.class);
+
+        System.out.print("LinkedHashSet<TreeType>: ");
         test(new LinkedHashSet<TreeType>(), TreeType.class);
 
         try {
@@ -112,6 +124,7 @@ class TreeType extends SetType implements Comparable<TreeType> {
 
     @Override
     public int compareTo(TreeType o) {
+        // 不用写成 return o.i - i;
         return o.i < i ? -1 : (o.i == i ? 0 : 1);
     }
 }
