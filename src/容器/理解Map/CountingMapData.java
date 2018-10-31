@@ -64,5 +64,7 @@ public class CountingMapData extends AbstractMap<Integer, String> {
 
     public static void main(String[] args) {
         System.out.println(new CountingMapData(30));
+        // toString→entrySet→getKey→getValue
+        // entry的value在外部，实际getValue时在计算得出
     }
 }
