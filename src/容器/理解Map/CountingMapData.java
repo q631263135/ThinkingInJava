@@ -36,6 +36,9 @@ public class CountingMapData extends AbstractMap<Integer, String> {
 
         @Override
         public String getValue() {
+            System.out.println("index : " + index);
+            System.out.println("chars[index % chars.length] : " + chars[index % chars.length]);
+            System.out.println("index / chars.length : " + index / chars.length);
             return chars[index % chars.length] + Integer.toString(index / chars.length);
         }
 
@@ -64,6 +67,7 @@ public class CountingMapData extends AbstractMap<Integer, String> {
 
     public static void main(String[] args) {
         System.out.println(new CountingMapData(30));
+
         // toString→entrySet→getKey→getValue
         // entry的value在外部，实际getValue时在计算得出
     }
