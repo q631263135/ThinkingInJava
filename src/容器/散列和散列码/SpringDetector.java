@@ -76,7 +76,7 @@ class Prediction {
 
 public class SpringDetector {
 
-    private static <T extends Groundhog> void detectingSpring(Class<T> type) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+    public static <T extends Groundhog> void detectingSpring(Class<T> type) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         Constructor<T> constructor = type.getConstructor(int.class);
         Map<Groundhog, Prediction> map = new HashMap<>();
         for (int i = 0; i < 10; i++) {
