@@ -1,5 +1,6 @@
 package 容器.散列和散列码.为速度而散列;
 
+import 容器.填充容器.Countries;
 import 容器.散列和散列码.MapEntry;
 
 import java.util.*;
@@ -50,6 +51,23 @@ public class SimpleHashMap<K, V> extends AbstractMap<K, V> {
 
     @Override
     public Set<Entry<K, V>> entrySet() {
-        return null;
+        Set<Entry<K, V>> set = new HashSet<>();
+        for (LinkedList<MapEntry<K, V>> bucket : buckets) {
+            if (bucket == null) {
+                continue;
+            }
+
+            for (MapEntry<K, V> pair : bucket) {
+                set.add(pair);
+            }
+        }
+        return set;
+    }
+
+    public static void main(String[] args) {
+        SimpleHashMap<String, String> m = new SimpleHashMap<>();
+        m.putAll(Countries.capitals(10));
+
+        System.out.println(m);
     }
 }
