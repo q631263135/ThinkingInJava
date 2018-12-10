@@ -73,4 +73,14 @@ public final class Directory {
     public static TreeInfo walk(String start) {
         return walk(new File(start));
     }
+
+    public static void main(String[] args) {
+        if (args.length == 0) {
+            System.out.println(walk(".", ".git"));
+        } else {
+            for (String arg : args) {
+                System.out.println(walk(arg));
+            }
+        }
+    }
 }
