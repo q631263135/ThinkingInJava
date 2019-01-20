@@ -1,6 +1,9 @@
 package IO.NIO;
 
+import org.junit.Test;
+
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -81,5 +84,53 @@ public class BufferToText {
         fc.read(buffer);
         buffer.flip();
         System.out.println(buffer.asCharBuffer());
+    }
+
+    @Test
+    public void allocateEnough() throws IOException {
+        FileChannel fc = new FileOutputStream("data4.txt").getChannel();
+        ByteBuffer buffer = ByteBuffer.allocate(24); // 24个字节，可以容纳 12个字符
+        buffer.asCharBuffer().put("Some text");
+        fc.write(buffer);
+        buffer.clear();
+        fc.close();
+
+        fc = new FileInputStream("data4.txt").getChannel();
+        fc.read(buffer);
+        buffer.flip();
+        System.out.println(buffer.asCharBuffer()); // 输出Some text，并且后面有空白
+
+    }
+
+    @Test
+    public void allocateNotEnough() throws IOException {
+        FileChannel fc = new FileOutputStream("data4.txt").getChannel();
+        ByteBuffer buffer = ByteBuffer.allocate(16); // 16个字节，可以容纳 8个字符
+        buffer.asCharBuffer().put("Some text"); // java.nio.BufferOverflowException
+        fc.write(buffer);
+        buffer.clear();
+        fc.close();
+
+        fc = new FileInputStream("data4.txt").getChannel();
+        fc.read(buffer);
+        buffer.flip();
+        System.out.println(buffer.asCharBuffer());
+
+    }
+
+    @Test
+    public void readNotEnough() throws IOException {
+        FileChannel fc = new FileOutputStream("data4.txt").getChannel();
+        ByteBuffer buffer = ByteBuffer.allocate(18); // 18个字节，可以容纳 8个字符
+        buffer.asCharBuffer().put("Some text"); // java.nio.BufferOverflowException
+        fc.write(buffer);
+        buffer.clear();
+        fc.close();
+
+        fc = new FileInputStream("data4.txt").getChannel();
+        ByteBuffer bufferLess = ByteBuffer.allocate(16);
+        fc.read(bufferLess);
+        bufferLess.flip();
+        System.out.println(bufferLess.asCharBuffer()); // Some tex
     }
 }
