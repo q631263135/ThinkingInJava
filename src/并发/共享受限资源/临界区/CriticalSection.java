@@ -1,6 +1,5 @@
 package 并发.共享受限资源.临界区;
 
-import sun.org.mozilla.javascript.internal.ast.TryStatement;
 import 并发.共享受限资源.临界区.临界资源类.PairManager;
 import 并发.共享受限资源.临界区.临界资源类.PairManager1;
 import 并发.共享受限资源.临界区.临界资源类.PairManager2;
