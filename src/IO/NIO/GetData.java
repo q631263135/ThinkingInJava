@@ -45,9 +45,21 @@ public class GetData {
         ByteBuffer byteBuffer = ByteBuffer.allocate(BSIZE);
         byteBuffer.wrap("hello".getBytes()); // 我认为这个byteBuffer底层的数组，就是hello.getBytes的值
 
-//        CharBuffer charBuffer = byteBuffer.asCharBuffer();
-//        charBuffer.put("hello");
         byteBuffer.put("hello".getBytes());
+//        byteBuffer.rewind();
+
+        while (byteBuffer.remaining() > 0) {
+            System.out.print(byteBuffer.get() + " "); // 这里难道不是打印hello的字节表示吗？调用rewind才会打印
+        }
+    }
+
+    @Test
+    public void storeAndReadCharCorrect2() {
+        ByteBuffer byteBuffer = ByteBuffer.allocate(BSIZE);
+        byteBuffer.wrap("hello".getBytes()); // 我认为这个byteBuffer底层的数组，就是hello.getBytes的值
+
+        CharBuffer charBuffer = byteBuffer.asCharBuffer();
+        charBuffer.put("hello");
 
         while (byteBuffer.remaining() > 0) {
             System.out.print(byteBuffer.get() + " "); // 这里难道不是打印hello的字节表示吗？
