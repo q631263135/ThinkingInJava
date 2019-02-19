@@ -24,7 +24,7 @@ public class UsingBuffers {
     public void testSymmerticScramble() {
         char[] data = "UsingBuffers".toCharArray();
         ByteBuffer bb = ByteBuffer.allocate(data.length * 2);
-        bb.wrap("UsingBuffers".getBytes());
+//        bb.wrap("UsingBuffers".getBytes());
         CharBuffer cb = bb.asCharBuffer();
         cb.put(data);
         System.out.println(cb.rewind());
@@ -35,6 +35,15 @@ public class UsingBuffers {
 
         symmerticScramble(cb);
 
+        System.out.println(cb.rewind());
+    }
+
+    @Test
+    public void testSymmerticScramble2() {
+        char[] data = "UsingBuffers".toCharArray();
+        ByteBuffer bb = ByteBuffer.allocate(data.length * 2);
+        bb.wrap("UsingBuffers".getBytes());
+        CharBuffer cb = bb.asCharBuffer();
         System.out.println(cb.rewind());
     }
 }
