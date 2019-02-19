@@ -1,4 +1,4 @@
-package 内部类.创建内部类;
+package 内部类.创建内部类.私有内部类的访问;
 
 import org.junit.Test;
 
@@ -8,7 +8,7 @@ public class InnerClassIdentityByPrivateTest {
     public void testAccessInner() {
         InnerClassIdentityByPrivate innerClassIdentityByPrivate = new InnerClassIdentityByPrivate("yangchaozheng");
         // InnerClassIdentityByPrivate.Inner inner = innerClassIdentityByPrivate.getInner();
-        // ↑↑↑'内部类.创建内部类.InnerClassIdentityByPrivate.Inner' has private access in '内部类.创建内部类.InnerClassIdentityByPrivate'
+        // ↑↑↑'内部类.创建内部类.私有内部类的访问.InnerClassIdentityByPrivate.Inner' has private access in '内部类.创建内部类.私有内部类的访问.InnerClassIdentityByPrivate'
     }
 
     @Test
