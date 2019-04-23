@@ -1,5 +1,7 @@
 package 并发.基本的线程机制.定义任务;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * Created by Administrator on 2017/11/10 0010.
  */
@@ -22,6 +24,11 @@ public class LiftOff implements Runnable{
     public void run() {
         while (countDown-- > 0) {
             System.out.println(status());
+            try {
+                TimeUnit.MILLISECONDS.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             Thread.yield();
         }
     }
