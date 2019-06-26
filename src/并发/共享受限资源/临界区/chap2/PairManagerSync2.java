@@ -1,9 +1,10 @@
-package 并发.共享受限资源.临界区.临界资源类;
+package 并发.共享受限资源.临界区.chap2;
 
-/**
- * Created by ycz on 2018/1/17.
- */
-public class PairManager2 extends PairManager {
+public class PairManagerSync2 extends PairManager {
+
+    /**
+     * synchronized block
+     */
     @Override
     public void increment() {
         Pair temp;
@@ -12,6 +13,7 @@ public class PairManager2 extends PairManager {
             p.incrementY();
             temp = getPair();
         }
+        // 该方法不必进行防护。
         store(temp);
     }
 }

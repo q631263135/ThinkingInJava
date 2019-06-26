@@ -1,8 +1,8 @@
-package 并发.共享受限资源.临界区;
+package 并发.共享受限资源.临界区.old;
 
-import 并发.共享受限资源.临界区.临界资源类.PairManager;
-import 并发.共享受限资源.临界区.临界资源类.PairManager1;
-import 并发.共享受限资源.临界区.临界资源类.PairManager2;
+import 并发.共享受限资源.临界区.old.临界资源类.PairManager;
+import 并发.共享受限资源.临界区.old.临界资源类.PairManager1;
+import 并发.共享受限资源.临界区.old.临界资源类.PairManager2;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
