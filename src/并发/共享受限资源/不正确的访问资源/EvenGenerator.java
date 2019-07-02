@@ -8,15 +8,13 @@ public class EvenGenerator extends IntGenerator {
     private int currentEvenValue = 0;
 
     @Override
-    public int next() {
+    public synchronized int next() {
         ++currentEvenValue;
         Thread.currentThread().yield();
         ++currentEvenValue;
-        if (currentEvenValue > 2000) {
 
-            return 1;
-        }
-        System.out.println(currentEvenValue);
+//        System.out.println("currentEvenValue:" + currentEvenValue);
+        System.out.println(1 / 0);
         return currentEvenValue;
     }
 
