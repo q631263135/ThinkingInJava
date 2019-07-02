@@ -25,13 +25,13 @@ public class ThreadLocalVariableHolder {
     public static void main(String[] args) throws InterruptedException {
         ExecutorService exec = Executors.newCachedThreadPool();
         for (int i = 0; i < 5; i++) {
-            exec.execute(() -> {
-                ThreadLocalVariableHolder.increment();
-
-                // 给其他线程执行的机会，然后返回到现场观察本来的变量值
-                Thread.yield();
-                System.out.println(Thread.currentThread() + " : " + ThreadLocalVariableHolder.get());
-            });
+//            exec.execute(() -> {
+//                ThreadLocalVariableHolder.increment();
+//
+//                // 给其他线程执行的机会，然后返回到现场观察本来的变量值
+//                Thread.yield();
+//                System.out.println(Thread.currentThread() + " : " + ThreadLocalVariableHolder.get());
+//            });
         }
 
         TimeUnit.SECONDS.sleep(1);
