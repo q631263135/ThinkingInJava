@@ -1,6 +1,4 @@
-package 并发.共享受限资源.临界区.临界资源类;
-
-import 并发.共享受限资源.临界区.临界资源类.Pair;
+package 并发.共享受限资源.临界区.old.临界资源类;
 
 import java.util.ArrayList;
 import java.util.Collections;

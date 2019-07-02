@@ -1,4 +1,4 @@
-package 并发.共享受限资源.临界区.临界资源类;
+package 并发.共享受限资源.临界区.chap3;
 
 /**
  * Created by ycz on 2018/1/16.
