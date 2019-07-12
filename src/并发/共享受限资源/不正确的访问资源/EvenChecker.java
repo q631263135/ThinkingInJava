@@ -1,5 +1,7 @@
 package 并发.共享受限资源.不正确的访问资源;
 
+import com.sun.javafx.binding.StringFormatter;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -20,9 +22,19 @@ public class EvenChecker implements Runnable {
     public void run() {
         while (!ge.isCanceled()) {
             int value = ge.next();
+            System.out.println(this.id + ":" + value);
             if (value % 2 != 0) {
                 System.out.println(this.id + ":" + value + " not even");
                 ge.cancel();
+            }
+
+            if (value > 100000) {
+                System.out.println(1 / 0);
+            }
+
+            if (value > 300000) {
+                ge.cancel();
+                System.out.println("300000 times. cancel test.");
             }
         }
     }
@@ -35,6 +47,6 @@ public class EvenChecker implements Runnable {
     }
 
     public static void test(IntGenerator gp) {
-        test(gp, 3);
+        test(gp, 5);
     }
 }
