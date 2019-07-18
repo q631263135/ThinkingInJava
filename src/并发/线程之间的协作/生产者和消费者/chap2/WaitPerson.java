@@ -19,13 +19,15 @@ public class WaitPerson implements Runnable {
                         wait();
                     }
                 }
-            }
-            System.out.println("Waitperson got " + restaurant.meal);
 
-            synchronized (restaurant.chef) {
-                restaurant.meal = null;
-                restaurant.chef.notifyAll();
+                System.out.println("Waitperson got " + restaurant.meal);
+
+                synchronized (restaurant.chef) {
+                    restaurant.meal = null;
+                    restaurant.chef.notifyAll();
+                }
             }
+
 
         } catch (InterruptedException e) {
             e.printStackTrace();
