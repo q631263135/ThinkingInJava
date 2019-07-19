@@ -25,7 +25,7 @@ public class Chef implements Runnable {
                 }
 
                 if (++count == 10) {
-                    restaurant.exec.shutdownNow();
+                    restaurant.money.shutdownNow();
                 }
                 System.out.println("Order up! ");
                 synchronized (restaurant.waitPerson) {

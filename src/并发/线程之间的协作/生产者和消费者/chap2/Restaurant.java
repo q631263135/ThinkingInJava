@@ -16,13 +16,13 @@ import java.util.concurrent.Executors;
  */
 public class Restaurant {
     Meal meal;
-    ExecutorService exec = Executors.newCachedThreadPool();
+    ExecutorService money = Executors.newCachedThreadPool();
     WaitPerson waitPerson = new WaitPerson(this);
     Chef chef = new Chef(this);
 
     public Restaurant() {
-        exec.execute(chef);
-        exec.execute(waitPerson);
+        money.execute(chef);
+        money.execute(waitPerson);
     }
 
     public static void main(String[] args) {
