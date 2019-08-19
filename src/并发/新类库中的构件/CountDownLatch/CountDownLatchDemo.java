@@ -12,7 +12,7 @@ public class CountDownLatchDemo {
 
     public static void main(String[] args) {
         ExecutorService exec = Executors.newCachedThreadPool();
-        CountDownLatch latch = new CountDownLatch(SIZE);
+        CountDownLatch latch = new CountDownLatch(SIZE); // 门闩
 
         for (int i = 0; i < 5; i++) {
             exec.execute(new WaitingTask(latch));
