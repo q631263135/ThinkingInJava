@@ -51,7 +51,7 @@ public class DelayedTask implements Runnable, Delayed {
 
     @Override
     public String toString() {
-        return String.format("[%1$-4d]", delta + " Task " + id);
+        return String.format("[%1$-4d]", delta) + " Task " + id;
     }
 
     public String summary() {
