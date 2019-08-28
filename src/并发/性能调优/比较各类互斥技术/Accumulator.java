@@ -5,6 +5,10 @@ import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Created by ycz on 2019/8/27.
@@ -83,26 +87,102 @@ abstract class Accumulator {
         }
 
         duration = System.nanoTime() - start;
-        System.out.printf("%1-13s: %13d\n", id, duration);
+        System.out.printf("%-13s: %13d\n", id, duration);
     }
 
     public static void report(Accumulator acc1, Accumulator acc2) {
         System.out.printf("%-22s: %.2f\n", acc1.id + "/" + acc2.id, acc1.duration / acc2.duration);
     }
+}
 
-    class BaseLine extends Accumulator {
-        {
-            id = "BaseLine";
+class BaseLine extends Accumulator {
+    {
+        id = "BaseLine";
+    }
+
+    @Override
+    public synchronized void accumulate() {
+        value += preLoaded[index++];
+        if (index >= SIZE) {
+            index = 0;
         }
+    }
 
-        @Override
-        public void accumulate() {
+    @Override
+    public long read() {
+        return value;
+    }
+}
+
+class SynchronizedTest extends Accumulator {
+    {
+        id = "synchronized";
+    }
+
+    @Override
+    public synchronized void accumulate() {
+        value += preLoaded[index++];
+        if (index >= SIZE) {
+            index = 0;
+        }
+    }
+
+    @Override
+    public synchronized long read() {
+        return value;
+    }
+}
+
+class LockTest extends Accumulator {
+    {
+        id = "Lock";
+    }
+
+    private Lock lock = new ReentrantLock();
+    @Override
+    public void accumulate() {
+        lock.lock();
+        try {
             value += preLoaded[index++];
+            if (index >= SIZE) {
+                index = 0;
+            }
+        } finally {
+            lock.unlock();
         }
+    }
 
-        @Override
-        public long read() {
+    @Override
+    public long read() {
+        lock.lock();
+        try {
             return value;
+        } finally {
+            lock.unlock();
         }
+    }
+}
+
+class AtomicTest extends Accumulator {
+
+    {
+        id = "Atomic";
+    }
+
+    private AtomicInteger index = new AtomicInteger(0);
+    private AtomicLong value = new AtomicLong(0);
+
+    @Override
+    public void accumulate() {
+        int i = index.getAndIncrement();
+        value.getAndAdd(preLoaded[i]);
+        if (++i >= SIZE) {
+            index.set(0);
+        }
+    }
+
+    @Override
+    public long read() {
+        return value.get();
     }
 }

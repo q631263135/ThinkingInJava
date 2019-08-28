@@ -2,6 +2,7 @@ package 数组.创建测试数据;
 
 import 数组.Generator;
 
+import javax.annotation.Generated;
 import java.util.Random;
 
 /**
@@ -45,4 +46,21 @@ public class RandomGenerator {
             super(length);
         }
     }
+
+    public static class Integer implements Generator<java.lang.Integer> {
+        private int mod = 10000;
+
+        public Integer() {
+        }
+
+        public Integer(int mod) {
+            this.mod = mod;
+        }
+
+        @Override
+        public java.lang.Integer next() {
+            return rd.nextInt(mod);
+        }
+    }
+
 }
