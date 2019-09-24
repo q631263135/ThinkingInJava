@@ -135,7 +135,7 @@ public class GreenhouseScheduler {
     private float lastHumidity = 50.0f;
     private int humidityDirection = +1;
     private Random rand = new Random(47);
-    List<DataPoint> data = Collections.synchronizedList(new ArrayList<>());
+    List<DataPoint> data = Collections.synchronizedList(new ArrayList<DataPoint>());
 
     class CollectData implements Runnable {
         @Override

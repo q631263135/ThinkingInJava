@@ -9,11 +9,13 @@ public class ThreadLocalVariableHolder {
 
     private static ThreadLocal<Integer> value = new ThreadLocal<Integer>() {
         private Random rand = new Random(47);
+
         @Override
         protected Integer initialValue() {
             return rand.nextInt(1000);
         }
     };
+
     public static void increment() {
         value.set(value.get() + 1);
     }
