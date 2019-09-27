@@ -13,7 +13,8 @@ public class AtomicIntegerTest3 implements Runnable {
         return i;
     }
 
-    private void evenIncrement() {
+    private synchronized void evenIncrement() {
+        i++;
         i++;
     }
 
