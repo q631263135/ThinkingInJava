@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
  * Created by ycz on 2019/7/2.
  */
 public class Interrupting {
+
     private static ExecutorService exec = Executors.newCachedThreadPool();
 
     static void test(Runnable runnable) throws InterruptedException {
@@ -20,9 +21,9 @@ public class Interrupting {
     }
 
     public static void main(String[] args) throws InterruptedException {
-//        test(new SleepBlocked());
+        test(new SleepBlocked());
 //        test(new IOBlocked(System.in));
-        test(new SynchronizedBlocked());
+//        test(new SynchronizedBlocked());
 
         System.out.println("Aborting with System.exit(0)");
         System.exit(0);
