@@ -27,6 +27,7 @@ public class WaitPerson extends Person {
                     }
                 }
 
+
                 System.out.println("Waitperson got " + restaurant.meal);
 
                 synchronized (restaurant.chef) {
