@@ -25,6 +25,7 @@ public class LiftOffRunner implements Runnable{
         try {
             while (!Thread.interrupted()) {
                 LiftOff rocket = rockets.take();
+                System.out.println(1);
                 rocket.run();
             }
         } catch (InterruptedException e) {
