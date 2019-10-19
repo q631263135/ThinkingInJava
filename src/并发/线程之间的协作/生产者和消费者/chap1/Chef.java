@@ -31,6 +31,7 @@ public class Chef implements Runnable {
                 synchronized (restaurant.waitPerson) {
                     restaurant.meal = new Meal(count);
                     restaurant.waitPerson.notifyAll();
+                    System.out.println(111);
                 }
                 TimeUnit.MILLISECONDS.sleep(100);
             }

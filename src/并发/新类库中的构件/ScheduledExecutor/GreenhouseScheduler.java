@@ -156,6 +156,9 @@ public class GreenhouseScheduler {
         }
     }
 
+    /*
+    这段并发程序，基本上无冲，最有可能发送资源共享的是CollectData线程，用同步语句块控制
+     */
     public static void main(String[] args) {
         GreenhouseScheduler gh = new GreenhouseScheduler();
         gh.schedule(gh.new Terminate(), 50000);
