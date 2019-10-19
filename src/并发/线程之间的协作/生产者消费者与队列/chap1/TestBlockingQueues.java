@@ -32,6 +32,7 @@ public class TestBlockingQueues {
         }
 
         getKey("Press 'Enter' (" + msg + ")");
+
         t.interrupt();
         System.out.println("Finished " + msg + " test");
     }

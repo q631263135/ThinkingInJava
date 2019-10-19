@@ -1,4 +1,4 @@
-package 并发.线程之间的协作.生产者和消费者.chap2;
+package 并发.线程之间的协作.生产者和消费者.chap3;
 
 import java.util.concurrent.TimeUnit;
 
@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
  * Created by ycz on 2019/7/17.
  */
 
-public class Chef implements Runnable {
+public class Chef extends Person {
     private Restaurant restaurant;
     private int count;
 
@@ -14,20 +14,21 @@ public class Chef implements Runnable {
         this.restaurant = restaurant;
     }
 
-
-    @Override
     public void run() {
         try {
             while (!Thread.interrupted()) {
                 synchronized (this) {
                     while (restaurant.meal != null) {
                         wait();
+                        System.out.println("Chef got notify");
+
                     }
                 }
 
                 if (++count == 10) {
                     restaurant.money.shutdownNow();
                 }
+
                 System.out.println("Order up! ");
                 synchronized (restaurant.waitPerson) {
                     restaurant.meal = new Meal(count);
